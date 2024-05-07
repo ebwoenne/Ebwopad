@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Notepad</title>
+</head>
+<body>
+    <h1>My Notepad</h1>
+    <textarea id="note" rows="10" cols="50"></textarea><br><br>
+    <button onclick="exportNote()">Export Note</button>
+
+    <script>
+        function exportNote() {
+            const noteContent = document.getElementById('note').value;
+            const blob = new Blob([noteContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'my_note.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
